@@ -18,8 +18,8 @@
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "pretty": true,
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
-  "include": ["src"],
+  "include": ["src", "src/index.ts"],
   "exclude": ["node_modules"]
 }
