@@ -1,16 +1,16 @@
 import { StatusCodes } from 'http-status-codes';
 
 export interface IErrorResponse {
-  statusCode: StatusCodes;
   message: string;
+  statusCode: number;
   status: string;
   comingFrom: string;
-  serializeError(): IError;
+  serializeErrors(): IError;
 }
 
 export interface IError {
-  statusCode: StatusCodes;
   message: string;
+  statusCode: number;
   status: string;
   comingFrom: string;
 }
@@ -25,10 +25,10 @@ export abstract class CustomError extends Error {
     this.comingFrom = comingFrom;
   }
 
-  serializeError(): IError {
+  serializeErrors(): IError {
     return {
-      statusCode: this.statusCode,
       message: this.message,
+      statusCode: this.statusCode,
       status: this.status,
       comingFrom: this.comingFrom,
     };
@@ -72,7 +72,7 @@ export class FileTooLargeError extends CustomError {
 }
 
 export class ServerError extends CustomError {
-  statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
+  statusCode = StatusCodes.SERVICE_UNAVAILABLE;
   status = 'error';
 
   constructor(message: string, comingFrom: string) {
@@ -80,7 +80,7 @@ export class ServerError extends CustomError {
   }
 }
 
-export interface ErrornoException extends Error {
+export interface ErrnoException extends Error {
   errno?: number;
   code?: string;
   path?: string;

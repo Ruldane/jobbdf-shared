@@ -1,4 +1,3 @@
-import { firstLetterUppercase } from './helpers';
 export {
   IAuthPayload,
   IAuthDocument,
@@ -81,8 +80,9 @@ export {
   NotAuthorizedError,
   FileTooLargeError,
   ServerError,
-  ErrornoException,
+  ErrnoException,
 } from './error-handler';
+export { winstonLogger } from './logger';
 export {
   firstLetterUppercase,
   lowerCase,
@@ -90,4 +90,3 @@ export {
   isEmail,
   isDataURL,
 } from './helpers';
-export { winstonLogger } from './logger';
