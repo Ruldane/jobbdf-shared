@@ -8,7 +8,7 @@ export function uploads(
   public_id?: string,
   overwrite?: boolean,
   invalidate?: boolean
-): Promise<UploadApiErrorResponse | UploadApiResponse | undefined> {
+): Promise<UploadApiResponse | UploadApiErrorResponse | undefined> {
   return new Promise((resolve) => {
     cloudinary.v2.uploader.upload(
       file,
@@ -16,17 +16,14 @@ export function uploads(
         public_id,
         overwrite,
         invalidate,
-        ressource_type: 'auto',
+        resource_type: 'auto', // zip, images
       },
       (
         error: UploadApiErrorResponse | undefined,
         result: UploadApiResponse | undefined
       ) => {
-        if (result) {
-          resolve(result);
-        } else {
-          resolve(error);
-        }
+        if (error) resolve(error);
+        resolve(result);
       }
     );
   });
@@ -37,7 +34,7 @@ export function videoUpload(
   public_id?: string,
   overwrite?: boolean,
   invalidate?: boolean
-): Promise<UploadApiErrorResponse | UploadApiResponse | undefined> {
+): Promise<UploadApiResponse | UploadApiErrorResponse | undefined> {
   return new Promise((resolve) => {
     cloudinary.v2.uploader.upload(
       file,
@@ -45,18 +42,15 @@ export function videoUpload(
         public_id,
         overwrite,
         invalidate,
-        chuck_size: 50000,
-        ressource_type: 'video',
+        chunk_size: 50000,
+        resource_type: 'video',
       },
       (
         error: UploadApiErrorResponse | undefined,
         result: UploadApiResponse | undefined
       ) => {
-        if (result) {
-          resolve(result);
-        } else {
-          resolve(error);
-        }
+        if (error) resolve(error);
+        resolve(result);
       }
     );
   });
