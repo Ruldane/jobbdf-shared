@@ -7,6 +7,7 @@ import {
 } from 'winston-elasticsearch';
 
 const esTransformer = (logData: LogData): TransformedData => {
+  console.log(logData);
   return ElasticsearchTransformer(logData);
 };
 
